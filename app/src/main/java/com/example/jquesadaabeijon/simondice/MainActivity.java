@@ -165,25 +165,18 @@ public class MainActivity extends AppCompatActivity {
                     loser.setBackgroundColor(Color.GRAY);
                     TextView t= (TextView) findViewById(R.id.turno);
                     t.setText("Turno: 0");
-                    botonAzul.setVisibility(View.VISIBLE);
-                    botonRojo.setVisibility(View.VISIBLE);
-                    botonAmarillo.setVisibility(View.VISIBLE);
-                    botonVerde.setVisibility(View.VISIBLE);
+                    btnRed.setVisibility(View.VISIBLE);
+                    btnGreen.setVisibility(View.VISIBLE);
+                    btnBlue.setVisibility(View.VISIBLE);
+                    btnYellow.setVisibility(View.VISIBLE);
                     t.setVisibility(View.VISIBLE);
                 }
             },1500);
-            if(record<puntuacion){
-                record=puntuacion;
-                record_valor.setText(""+record);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putInt(getString(R.string.saved_high_score), record);
-                editor.commit();
 
-            }
-            puntuacion=0;
-            puntos_valor.setText(""+puntuacion);
-            nuevaPartida();
-            botonStart.setEnabled(true);
+            points=0;
+            totalPoints.setText(""+points);
+            newGame();
+            btnStart.setEnabled(true);
         }
     }
 
