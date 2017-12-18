@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SimonDice</string>
+    <string name="start">Start</string>
+    <string name="new_game">Nueva partida</string>
+    <string name="score">Puntuación</string>
+    <string name="stage">Nivel</string>
+
+</resources>

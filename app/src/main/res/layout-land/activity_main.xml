@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowCount="2"
+        android:layout_weight="5">
+
+
+        <Button
+            android:id="@+id/buttonRed"
+            android:layout_width="340dp"
+            android:layout_height="140dp"
+            android:layout_gravity="left"
+            android:backgroundTint="#ff0000"
+            />
+
+        <Button
+            android:id="@+id/buttonGreen"
+            android:layout_width="340dp"
+            android:layout_height="140dp"
+            android:layout_gravity="right"
+            android:backgroundTint="#0fff00"
+            />
+
+
+        <Button
+            android:id="@+id/buttonBlue"
+            android:layout_width="340dp"
+            android:layout_height="140dp"
+            android:layout_gravity="left"
+            android:backgroundTint="#000fff"
+            />
+
+
+        <Button
+            android:id="@+id/buttonYellow"
+            android:layout_width="340dp"
+            android:layout_height="140dp"
+            android:layout_gravity="right"
+            android:backgroundTint="#f0ff00"
+            />
+
+
+    </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puntuacion"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Nivel"
+            android:layout_weight="1"/>
+
+        </LinearLayout>
+
+</LinearLayout>
