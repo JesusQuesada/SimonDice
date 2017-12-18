@@ -152,17 +152,17 @@ public class MainActivity extends AppCompatActivity {
                     t.setVisibility(View.INVISIBLE);
                     loser.setBackgroundColor(Color.WHITE);
                     loser.setText("HAS PERDIDO");
-                    loseMessage.setScaleX(3f);
-                    loseMessage.setScaleY(3f);
+                    loser.setScaleX(3f);
+                    loser.setScaleY(3f);
                 }
             },50);
-            loseMessage.postDelayed(new Runnable() {
+            loser.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    loseMessage.setText("");
-                    loseMessage.setScaleX(1f);
-                    loseMessage.setScaleY(1f);
-                    loseMessage.setBackgroundColor(Color.GRAY);
+                    loser.setText("");
+                    loser.setScaleX(1f);
+                    loser.setScaleY(1f);
+                    loser.setBackgroundColor(Color.GRAY);
                     TextView t= (TextView) findViewById(R.id.turno);
                     t.setText("Turno: 0");
                     botonAzul.setVisibility(View.VISIBLE);
