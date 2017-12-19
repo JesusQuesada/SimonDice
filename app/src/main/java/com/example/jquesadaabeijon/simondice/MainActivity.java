@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnGreen;
     Button btnBlue;
     Button btnYellow;
+    Button btnCentral;
 
     TextView totalPoints;
 
@@ -38,21 +39,13 @@ public class MainActivity extends AppCompatActivity {
         btnGreen = (Button)findViewById(R.id.buttonGreen);
         btnBlue = (Button)findViewById(R.id.buttonBlue);
         btnYellow = (Button)findViewById(R.id.buttonYellow);
+        btnCentral=(Button)findViewById(R.id.buttonCentral);
 
         totalPoints = (TextView)findViewById(R.id.puntuacion);
 
-        totalPoints.setText(""+points);
+        totalPoints.setText("" + points);
 
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-
-        btnRed.setBackgroundColor(Color.RED);
-        btnRed.setAlpha(0.5f);
-        btnGreen.setBackgroundColor(Color.GREEN);
-        btnGreen.setAlpha(0.5f);
-        btnBlue.setBackgroundColor(Color.BLUE);
-        btnBlue.setAlpha(0.5f);
-        btnYellow.setBackgroundColor(Color.YELLOW);
-        btnYellow.setAlpha(0.5f);
 
         findViewById(R.id.nueva).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,29 +93,112 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newGame(){
+        findViewById(R.id.buttonCentral).setBackgroundColor(Color.GRAY);
         turns=0;
         points=0;
         totalPoints.setText(""+points);
         Button btnStart=(Button)findViewById(R.id.start);
         btnStart.setEnabled(true);
+        btnCentral.setEnabled(true);
         TextView t= (TextView) findViewById(R.id.turno);
         t.setText("Turno: "+turns);
     }
 
+    public void updateBackground(int color){
+        View fondo=findViewById(R.id.buttonCentral);
+        fondo.setBackgroundColor(color);
+    }
+
     public void secuencyGenerate(){
         Random rd=new Random();
-        int[] coloresDisponibles={Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW};
-        colors[turns]=coloresDisponibles[rd.nextInt(4)];
+        int[] colorsStock={Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW};
+        colors[turns]=colorsStock[rd.nextInt(4)];
         TextView t= (TextView) findViewById(R.id.turno);
         t.setText("Turno: "+(turns+1));
         turns++;
+        showSecuency();
         correct=true;
         check=0;
     }
 
+    public void showSecuency(){
+        final View fondo=findViewById(R.id.buttonCentral);
+        secuency=0;
+        for(int i=0;i<turns;i++) {
+            if (colors[i] != 0) {
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateBackground(colors[secuency]);
+                        fondo.setAlpha(0.2f);
+                    }
+                }, (i+1) * 500);
+
+                //cambios de brillo aqui dentro
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fondo.setAlpha(0.5f);
+                    }
+                },(500*(i+1))+100);
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fondo.setAlpha(0.9f);
+                    }
+                },(500*(i+1))+150);
+
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fondo.setAlpha(1f);
+                    }
+                },(500*(i+1))+250);
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fondo.setAlpha(0.9f);
+                    }
+                },(500*(i+1))+350);
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fondo.setAlpha(0.5f);
+                    }
+                },(500*(i+1))+400);
+
+                fondo.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fondo.setAlpha(0.2f);
+                        secuency++;
+                    }
+                },(500*(i+1))+450);
+
+            }
+
+        }
+        fondo.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fondo.setBackground(getResources().getDrawable(R.drawable.center_hover));
+                fondo.setAlpha(1f);
+                btnRed.setEnabled(true);
+                btnGreen.setEnabled(true);
+                btnBlue.setEnabled(true);
+                btnYellow.setEnabled(true);
+            }
+        },(turns+1)*500);
+
+        Button botonStart=(Button)findViewById(R.id.start);
+        botonStart.setEnabled(false);
+        btnCentral.setEnabled(false);
+    }
+
+
     public void colorCheck(int color){
         Button btnStart=(Button)findViewById(R.id.start);
-        final TextView loser = (TextView)findViewById(R.id.loser);
+        final Button loser=(Button)findViewById(R.id.buttonCentral);
         if(color==colors[check]){
             check++;
             points+=5;
@@ -135,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
             points+=turns*2;
             totalPoints.setText(""+points);
             btnStart.setEnabled(true);
+            btnCentral.setEnabled(true);
             btnRed.setEnabled(false);
             btnGreen.setEnabled(false);
             btnBlue.setEnabled(false);
@@ -151,9 +228,10 @@ public class MainActivity extends AppCompatActivity {
                     TextView t= (TextView) findViewById(R.id.turno);
                     t.setVisibility(View.INVISIBLE);
                     loser.setBackgroundColor(Color.WHITE);
-                    loser.setText("HAS PERDIDO");
-                    loser.setScaleX(3f);
+                    loser.setText("MAL");
+                    loser.setScaleX(6f);
                     loser.setScaleY(3f);
+
                 }
             },50);
             loser.postDelayed(new Runnable() {
@@ -162,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     loser.setText("");
                     loser.setScaleX(1f);
                     loser.setScaleY(1f);
-                    loser.setBackgroundColor(Color.GRAY);
+                    loser.setBackground(getResources().getDrawable(R.drawable.center_hover));
                     TextView t= (TextView) findViewById(R.id.turno);
                     t.setText("Turno: 0");
                     btnRed.setVisibility(View.VISIBLE);
